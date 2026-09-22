@@ -7,7 +7,8 @@ import Dashboard from "./pages/dashBoard/DashBoard";
 import ProtectedRoute from "./components/layout/ProtectedRoute";
 import ResumeBuilder from "./pages/resume/ResumeBuilder";
 import MyResumes from "./pages/resume/MyResumes";
-import InterviewPrep from "./pages/InterviewPrep";
+import InterviewPrep from "./pages/Interview/InterviewPrep";
+import MyInterviews from "./pages/Interview/MyInterviews";
 
 function App() {
   const { user, loading } = useAppContext();
@@ -21,22 +22,14 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route
-        path="/login"
-        element={!user ? <Login /> : <Navigate to="/dash-board" />}
-      />
-      <Route
-        path="/register"
-        element={!user ? <Register /> : <Navigate to="/dash-board" />}
-      />
-      <Route
-        path="/dash-board"
-        element={user ? <Dashboard /> : <Navigate to="/login" />}
-      />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/dash-board" element={<Dashboard />} />
       <Route element={<ProtectedRoute />}>
         <Route path="/resume/builder" element={<ResumeBuilder />} />
         <Route path="/resume/my-resumes" element={<MyResumes />} />
         <Route path="/interview" element={<InterviewPrep />} />
+        <Route path="/interview/my-interviews" element={<MyInterviews />} />
       </Route>
     </Routes>
   );

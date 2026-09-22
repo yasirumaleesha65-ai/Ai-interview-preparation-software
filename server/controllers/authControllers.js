@@ -6,7 +6,7 @@ const generateToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
 
-// ✅ Register
+//  Register
 export const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -44,7 +44,7 @@ export const registerUser = async (req, res) => {
   }
 };
 
-// ✅ Login
+//  Login
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -81,7 +81,7 @@ export const loginUser = async (req, res) => {
   }
 };
 
-// ✅ Logout
+//  Logout
 export const logoutUser = async (req, res) => {
   try {
     res.clearCookie("token").json({

@@ -22,14 +22,14 @@ app.use(
     origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
-  })
+  }),
 );
 
 // app.use("/api/resume", resumeRoutes);
 // app.use("/api/cover-letter", coverLetterRoutes);
 // app.use("/api/interview", interviewRoutes);
 app.use("/api/users", authRoutes);
-app.use("/api/resume", resumeRoutes);
+app.use("/api/cover-letter", resumeRoutes);
 app.use("/api/interview", interviewRoutes);
 
 connectToDataBase();

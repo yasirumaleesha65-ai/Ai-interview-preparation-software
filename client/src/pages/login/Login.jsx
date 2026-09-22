@@ -29,12 +29,12 @@ function Login() {
       const response = await axios.post(
         "http://localhost:3000/api/users/signin",
         formData,
-        { withCredentials: true }
+        { withCredentials: true },
       );
 
-      if (response.data.success) {
+      if (response.data) {
         // Save user in context/localStorage if needed later
-        navigate("/dashboard"); // or your main app page
+        navigate("/dash-board"); // or your main app page
       }
     } catch (err) {
       console.error(err);
@@ -45,7 +45,7 @@ function Login() {
   };
 
   return (
-    <FormContainer title="Welcome Back 👋" onSubmit={handleSubmit}>
+    <FormContainer title="Welcome Back " onSubmit={handleSubmit}>
       <FormInput
         label="Email Address"
         name="email"

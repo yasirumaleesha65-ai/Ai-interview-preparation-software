@@ -5,7 +5,7 @@ import { InterviewResponse } from "../models/InterviewResponse.js";
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 /**
- * 🎯 1️⃣ Start a new AI interview session
+ *  Start a new AI interview session
  */
 export const startInterview = async (req, res) => {
   try {
@@ -18,7 +18,7 @@ export const startInterview = async (req, res) => {
         .json({ success: false, message: "Job role required" });
     }
 
-    // ✅ Generate 5 interview questions using Gemini
+    //  Generate 5 interview questions using Gemini
     const prompt = `
     Generate 5 realistic ${
       experienceLevel || "intermediate"
@@ -26,7 +26,9 @@ export const startInterview = async (req, res) => {
     for a ${jobRole} position. Format them as a numbered list.
     `;
 
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const model = genAI.getGenerativeModel({
+      model: "models/gemini-3-flash-preview",
+    });
     const result = await model.generateContent(prompt);
     const text = result.response.text();
 
@@ -36,7 +38,7 @@ export const startInterview = async (req, res) => {
       .filter((q) => q.trim() !== "")
       .map((q) => q.trim());
 
-    // ✅ Save to DB
+    //  Save to DB
     const session = await InterviewSession.create({
       userId,
       jobRole,
@@ -59,7 +61,7 @@ export const startInterview = async (req, res) => {
 };
 
 /**
- * 💬 2️⃣ Evaluate user's answer to a question
+ *  Evaluate user's answer to a question
  */
 export const evaluateAnswer = async (req, res) => {
   try {
@@ -71,7 +73,7 @@ export const evaluateAnswer = async (req, res) => {
       });
     }
 
-    // ✅ Generate AI feedback
+    //  Generate AI feedback
     const prompt = `
     You are a technical interviewer. Evaluate the following answer.
     Question: "${question}"
@@ -91,7 +93,7 @@ export const evaluateAnswer = async (req, res) => {
     const ratingMatch = feedback.match(/(\d+(\.\d+)?)/);
     const rating = ratingMatch ? parseFloat(ratingMatch[1]) : null;
 
-    // ✅ Save response to DB
+    //  Save response to DB
     const savedResponse = await InterviewResponse.create({
       sessionId,
       question,
@@ -115,12 +117,12 @@ export const evaluateAnswer = async (req, res) => {
 };
 
 /**
- * 🗂️ 3️⃣ Get all user interview sessions
+ * Get all user interview sessions
  */
 export const getUserInterviews = async (req, res) => {
   try {
     const sessions = await InterviewSession.find({ userId: req.user._id }).sort(
-      { createdAt: -1 }
+      { createdAt: -1 },
     );
     res.status(200).json({ success: true, sessions });
   } catch (error) {

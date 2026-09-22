@@ -1,15 +1,15 @@
 import express from "express";
 import { verifyToken } from "../middleWare/authMiddleware.js";
 import {
-  generateResume,
-  getUserResumes,
-  downloadResumePDF,
+  generateCoverLetter,
+  getUserCoverLetters,
+  deleteCoverLetter,
 } from "../controllers/resumeController.js";
 
 const router = express.Router();
 
-router.post("/generate", verifyToken, generateResume);
-router.get("/my-resumes", verifyToken, getUserResumes);
-router.get("/download/:id", verifyToken, downloadResumePDF);
+router.post("/generate", verifyToken, generateCoverLetter);
+router.get("/my-cover-letters", verifyToken, getUserCoverLetters);
+router.delete("/:id", deleteCoverLetter);
 
 export default router;

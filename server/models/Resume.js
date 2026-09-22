@@ -1,22 +1,81 @@
 import mongoose from "mongoose";
 
-const resumeSchema = new mongoose.Schema(
+const coverLetterSchema = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    fullName: String,
-    email: String,
-    phone: String,
-    summary: String,
-    skills: [String],
-    experience: String,
-    education: String,
-    aiEnhancedResume: String,
+
+    name: {
+      type: String,
+      required: true,
+    },
+
+    jobTitle: {
+      type: String,
+      required: true,
+    },
+
+    companyName: {
+      type: String,
+      required: true,
+    },
+
+    position: {
+      type: String,
+      required: true,
+    },
+
+    jobDescription: {
+      type: String,
+      required: true,
+    },
+
+    experience: {
+      type: String,
+      default: "",
+    },
+
+    skills: {
+      type: String,
+      default: "",
+    },
+
+    education: {
+      type: String,
+      default: "",
+    },
+
+    achievements: {
+      type: String,
+      default: "",
+    },
+
+    motivation: {
+      type: String,
+      default: "",
+    },
+
+    tone: {
+      type: String,
+      default: "Professional",
+    },
+
+    additionalInfo: {
+      type: String,
+      default: "",
+    },
+
+    coverLetter: {
+      type: String,
+      required: true,
+    },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  },
 );
 
-export const Resume = mongoose.model("Resume", resumeSchema);
+export const CoverLetter = mongoose.model("CoverLetter", coverLetterSchema);

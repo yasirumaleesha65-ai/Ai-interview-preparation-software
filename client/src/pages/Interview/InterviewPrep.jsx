@@ -18,7 +18,7 @@ export default function InterviewPrep() {
       const res = await axios.post(
         "http://localhost:3000/api/interview/generate",
         { jobRole, experienceLevel },
-        { withCredentials: true }
+        { withCredentials: true },
       );
       if (res.data.success) {
         setSession(res.data.session);
@@ -43,7 +43,7 @@ export default function InterviewPrep() {
           question,
           answer,
         },
-        { withCredentials: true }
+        { withCredentials: true },
       );
       if (res.data.success) {
         setEvaluations((prev) => ({
@@ -61,7 +61,7 @@ export default function InterviewPrep() {
     <div className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-md">
         <h1 className="text-4xl font-bold text-center mb-8 text-indigo-700">
-          AI Interview Practice 💬
+          AI Interview Practice
         </h1>
 
         {/* Input Form */}
@@ -85,7 +85,7 @@ export default function InterviewPrep() {
             disabled={loading}
             className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg px-6 py-3 transition"
           >
-            {loading ? "Generating..." : "Start Interview 🚀"}
+            {loading ? "Generating..." : "Start Interview "}
           </button>
         </div>
 
@@ -127,7 +127,7 @@ export default function InterviewPrep() {
                     }
                     className="bg-green-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-green-700"
                   >
-                    Evaluate Answer ✅
+                    Evaluate Answer
                   </button>
 
                   {evaluations[question] && (
